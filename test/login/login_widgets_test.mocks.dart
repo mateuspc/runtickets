@@ -11,7 +11,8 @@ import 'package:http/http.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
 import 'package:runtickets/models/api_response.dart' as _i3;
-import 'package:runtickets/pages/autenticacao/bloc/login_bloc.dart' as _i8;
+import 'package:runtickets/pages/autenticacao/login/bloc/login_bloc.dart'
+    as _i8;
 import 'package:runtickets/pages/autenticacao/login/models/login_request_model.dart'
     as _i9;
 

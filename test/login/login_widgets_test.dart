@@ -4,7 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 import 'package:runtickets/models/api_response.dart';
-import 'package:runtickets/pages/autenticacao/bloc/login_bloc.dart';
+import 'package:runtickets/pages/autenticacao/login/bloc/login_bloc.dart';
 import 'package:runtickets/pages/autenticacao/login/models/login_request_model.dart';
 import 'package:runtickets/pages/autenticacao/login/page_login.dart';
 import 'package:http/http.dart' as http;

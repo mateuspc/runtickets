@@ -26,7 +26,10 @@ class _PageSplashState extends State<PageSplash> {
        backgroundColor: AppColors.colorPrimary,
        body: Center(
          key: const Key("chave_widget_image"),
-         child: Image.asset("assets/logo/logo.png"),
+         child: SizedBox(
+             width: 110,
+             child: Image.asset("assets/loading/white_animation_splash.gif")
+         ),
        ),
     );
   }

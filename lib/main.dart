@@ -26,6 +26,7 @@ class RunTickets extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.colorPrimary),
           useMaterial3: true,
+          scaffoldBackgroundColor: AppColors.scaffoldBackground
         ),
         routerConfig: AppRoutes.router,
       ),
