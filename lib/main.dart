@@ -6,6 +6,7 @@ import 'package:runtickets/pages/autenticacao/provider/login_provider.dart';
 import 'package:runtickets/pages/splash/page_splash.dart';
 import 'package:runtickets/routes.dart';
 import 'package:runtickets/styles/app_colors.dart';
+import 'package:runtickets/styles/app_fonts.dart';
 
 void main() async {
 
@@ -31,7 +32,27 @@ class RunTickets extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.colorPrimary),
           useMaterial3: true,
-          scaffoldBackgroundColor: AppColors.scaffoldBackground
+          scaffoldBackgroundColor: AppColors.scaffoldBackground,
+          fontFamily: FontsApp.montserratBold,
+          navigationBarTheme: NavigationBarThemeData(
+            labelTextStyle: MaterialStateProperty.resolveWith((state) {
+              if (state.contains(MaterialState.selected)) {
+                return const TextStyle(color: Colors.white);
+              }
+              return const TextStyle(color: Colors.grey);
+            }),
+            iconTheme: MaterialStateProperty.resolveWith((state){
+              if(state.contains(MaterialState.pressed)){
+                return const IconThemeData(
+                  color: Colors.white
+                );
+              }
+              return const IconThemeData(
+                  color: Colors.grey
+              );
+            })
+          ),
+
         ),
         routerConfig: AppRoutes.router,
       ),
