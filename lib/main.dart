@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:runtickets/pages/autenticacao/provider/login_provider.dart';
@@ -6,8 +7,12 @@ import 'package:runtickets/pages/splash/page_splash.dart';
 import 'package:runtickets/routes.dart';
 import 'package:runtickets/styles/app_colors.dart';
 
-void main() {
-  runApp(const RunTickets());
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) {
+    runApp(const RunTickets());
+  });
 }
 
 class RunTickets extends StatelessWidget {

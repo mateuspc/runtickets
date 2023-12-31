@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:runtickets/routes.dart';
 import 'package:runtickets/styles/app_colors.dart';
+import 'package:runtickets/widgets/button/elevated_button_custom.dart';
 import 'package:runtickets/widgets/text_input_email.dart';
 import 'package:runtickets/widgets/text_input_password.dart';
 
@@ -83,41 +84,13 @@ class _PageLoginState extends State<PageLogin> {
                             const SizedBox(
                               height: 15,
                             ),
-                            SizedBox(
-                              width: size.width,
-                              height: 45,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  FocusScope.of(context).unfocus();
-                                  _formKey.currentState!.validate();
-                                  // context.go(AppRoutes.PAGE_LOADING);
-                                },
-                                style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          10.0), // Ajuste o raio conforme necessário
-                                    ),
-                                  ),
-                                  overlayColor:
-                                      MaterialStateProperty.resolveWith<Color?>(
-                                    (Set<MaterialState> states) {
-                                      if (states.contains(MaterialState.pressed)) {
-                                        return Colors.grey.withOpacity(
-                                            0.5); // Sua cor de sobreposição ao clicar
-                                      }
-                                      return null; // Nenhuma sobreposição quando não estiver pressionado
-                                    },
-                                  ),
-                                  backgroundColor: MaterialStateProperty.all(
-                                      AppColors.colorPrimary),
-                                  foregroundColor:
-                                      MaterialStateProperty.all(AppColors.colorWhite),
-                                ),
-                                child: Text("Entrar"),
-                              ),
-                            ),
+                            ElevatedButtonCustom(
+                              text: 'Entrar',
+                              onPressed: () {
+                                FocusScope.of(context).unfocus();
+                                _formKey.currentState!.validate();
+                                // context.go(AppRoutes.PAGE_LOADING);
+                              },),
                             const SizedBox(
                               height: 15,
                             ),
@@ -222,3 +195,4 @@ class _PageLoginState extends State<PageLogin> {
     );
   }
 }
+
