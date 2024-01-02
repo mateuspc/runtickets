@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:runtickets/styles/app_colors.dart';
-import 'package:runtickets/widgets/button/elevated_button_custom.dart';
+import 'package:runtickets/widgets_input/button/elevated_button_custom.dart';
 
 void main(){
 

@@ -34,12 +34,21 @@ class RunTickets extends StatelessWidget {
           useMaterial3: true,
           scaffoldBackgroundColor: AppColors.scaffoldBackground,
           fontFamily: FontsApp.montserratBold,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.transparent,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.white, // Defina a cor desejada da barra de status
+              statusBarIconBrightness: Brightness.dark, // Defina a cor desejada dos ícones da barra de status
+            ),
+          ),
           navigationBarTheme: NavigationBarThemeData(
             labelTextStyle: MaterialStateProperty.resolveWith((state) {
               if (state.contains(MaterialState.selected)) {
                 return const TextStyle(color: Colors.white);
               }
-              return const TextStyle(color: Colors.grey);
+              return const TextStyle(color: Colors.white);
             }),
             iconTheme: MaterialStateProperty.resolveWith((state){
               if(state.contains(MaterialState.pressed)){

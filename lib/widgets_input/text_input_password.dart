@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:runtickets/styles/app_colors.dart';
-import 'package:runtickets/widgets/utils/input_colors.dart';
-import 'package:runtickets/widgets/utils/input_fontsize.dart';
-import 'package:runtickets/widgets/utils/input_utils.dart';
+import 'package:runtickets/widgets_input/utils/input_colors.dart';
+import 'package:runtickets/widgets_input/utils/input_fontsize.dart';
+import 'package:runtickets/widgets_input/utils/input_utils.dart';
 
 import 'enums/input_text_state_enum.dart';
 

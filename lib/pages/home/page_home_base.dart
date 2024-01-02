@@ -17,16 +17,8 @@ class _PageHomeState extends State<PageHome> {
         title: Image.asset("assets/logo/logo_horizontal_azul.png"),
       ),
     ),
-      desktop: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.colorPrimary,
-          toolbarHeight: 80,
-          title: SizedBox(
-              height: 50,
-              child: Image.asset("assets/logo/logo.png")
-          ),
-        ),
-      ),
+      desktop: Container()
+
 
     );
   }

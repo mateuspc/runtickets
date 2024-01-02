@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:runtickets/routes.dart';
 import 'package:runtickets/styles/app_colors.dart';
-import 'package:runtickets/widgets/button/elevated_button_custom.dart';
-import 'package:runtickets/widgets/text_input_email.dart';
-import 'package:runtickets/widgets/text_input_password.dart';
-
+import 'package:runtickets/widgets_input/button/elevated_button_custom.dart';
+import 'package:runtickets/widgets_input/text_input_email.dart';
+import 'package:runtickets/widgets_input/text_input_password.dart';
+import 'package:uicons/uicons.dart';
 import 'bloc/login_bloc.dart';
 
 class PageLogin extends StatefulWidget {
@@ -35,6 +35,17 @@ class _PageLoginState extends State<PageLogin> {
       },
       child: Scaffold(
         key: const Key("chave_widget_login"),
+        appBar: AppBar(
+          leading: Align(
+            alignment: Alignment.centerLeft,
+            child: IconButton(
+              onPressed: (){
+                context.go(AppRoutes.PAGE_DASHBOARD);
+              },
+              icon: Icon(UIcons.regularRounded.angle_left),
+            ),
+          ),
+        ),
         body: Center(
           child: Container(
             width: 400,

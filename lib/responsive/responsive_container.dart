@@ -11,18 +11,20 @@ class ResponsiveContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (AppDimens.isPhone(context)) {
-          // Código para dispositivos móveis
-          return mobile;
-        } else if (AppDimens.isWeb(context)) {
-          // Código para web
-          return desktop;
-
-        }
-       return desktop;
-      },
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          if (AppDimens.isPhone(context)) {
+            // Código para dispositivos móveis
+            return mobile;
+          } else if (AppDimens.isWeb(context)) {
+            // Código para web
+            return desktop;
+      
+          }
+         return desktop;
+        },
+      ),
     );
   }
 }
