@@ -47,7 +47,7 @@ class ElevatedButtonCustom extends StatelessWidget {
           foregroundColor:
           MaterialStateProperty.all(AppColors.colorWhite),
         ),
-        child: Text("Entrar"),
+        child: Text(text),
       ),
     );
   }

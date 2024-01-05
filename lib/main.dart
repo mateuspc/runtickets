@@ -36,7 +36,7 @@ class RunTickets extends StatelessWidget {
           fontFamily: FontsApp.montserratBold,
           visualDensity: VisualDensity.adaptivePlatformDensity,
 
-          appBarTheme: const AppBarTheme(
+          appBarTheme: const AppBarTheme( 
             backgroundColor: Colors.transparent,
             systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.white, // Defina a cor desejada da barra de status

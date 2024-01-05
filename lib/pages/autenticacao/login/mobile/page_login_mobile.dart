@@ -6,16 +6,16 @@ import 'package:runtickets/widgets_input/button/elevated_button_custom.dart';
 import 'package:runtickets/widgets_input/text_input_email.dart';
 import 'package:runtickets/widgets_input/text_input_password.dart';
 import 'package:uicons/uicons.dart';
-import 'bloc/login_bloc.dart';
+import '../bloc/login_bloc.dart';
 
-class PageLogin extends StatefulWidget {
-  const PageLogin({super.key});
+class PageLoginMobile extends StatefulWidget {
+  const PageLoginMobile({super.key});
 
   @override
-  State<PageLogin> createState() => _PageLoginState();
+  State<PageLoginMobile> createState() => _PageLoginMobileState();
 }
 
-class _PageLoginState extends State<PageLogin> {
+class _PageLoginMobileState extends State<PageLoginMobile> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
   final LoginBloc _loginBloc = LoginBloc();
@@ -82,9 +82,6 @@ class _PageLoginState extends State<PageLogin> {
                               emailController: _emailController,
                               hint: 'exemplo@gmail.com',
                               formKey: _formKey,
-                            ),
-                            const SizedBox(
-                              height: 15,
                             ),
                             TextInputPassword(
                               key: const Key('textFieldSenha'),

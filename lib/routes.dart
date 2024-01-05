@@ -1,11 +1,10 @@
 
 import 'package:go_router/go_router.dart';
-import 'package:runtickets/pages/autenticacao/cadastro/page_cadastro.dart';
-import 'package:runtickets/pages/autenticacao/login/page_login.dart';
+import 'package:runtickets/pages/autenticacao/cadastro/page_cadastro_base.dart';
+import 'package:runtickets/pages/autenticacao/login/page_login_base.dart';
 import 'package:runtickets/pages/dashboard/page_dashboard_base.dart';
 import 'package:runtickets/pages/home/page_home_base.dart';
 import 'package:runtickets/pages/loading/page_loading.dart';
-import 'package:runtickets/pages/splash/page_splash.dart';
 
 class AppRoutes {
   static const PAGE_HOME = "/home";
@@ -24,11 +23,11 @@ class AppRoutes {
       ),
       GoRoute(
         path: PAGE_LOGIN,
-        builder: (context, state) => const PageLogin(),
+        builder: (context, state) => const PageLoginBase(),
       ),
       GoRoute(
         path: PAGE_CADASTRO,
-        builder: (context, state) => const PageCadastro(),
+        builder: (context, state) => const PageCadastroBase(),
       ),
       GoRoute(
         path: PAGE_HOME,

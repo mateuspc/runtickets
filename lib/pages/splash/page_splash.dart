@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:runtickets/pages/autenticacao/login/page_login.dart';
+import 'package:runtickets/pages/autenticacao/login/mobile/page_login_mobile.dart';
 import 'package:runtickets/routes.dart';
 import 'package:runtickets/styles/app_colors.dart';
 

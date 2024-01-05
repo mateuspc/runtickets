@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 import 'package:runtickets/models/api_response.dart';
 import 'package:runtickets/pages/autenticacao/login/bloc/login_bloc.dart';
 import 'package:runtickets/pages/autenticacao/login/models/login_request_model.dart';
-import 'package:runtickets/pages/autenticacao/login/page_login.dart';
+import 'package:runtickets/pages/autenticacao/login/mobile/page_login_mobile.dart';
 import 'package:http/http.dart' as http;
+import 'package:runtickets/pages/autenticacao/login/page_login_base.dart';
 import 'package:runtickets/pages/autenticacao/provider/login_provider.dart';
 
 import 'data/login_request_fake.dart';
@@ -27,7 +28,7 @@ void main(){
           ChangeNotifierProvider(create: (_) => LoginProvider(true, testLogin: apiResponse),)
         ],
         child: const MaterialApp(
-          home: PageLogin(),
+          home: PageLoginBase(),
         ),
       ));
 
@@ -43,7 +44,7 @@ void main(){
     testWidgets("Se o campo login e senha forem vazios retorne um AlerDialog com a mensagem O campo senha e email são obrigatórios", (tester) async {
 
       await tester.pumpWidget(const MaterialApp(
-        home: PageLogin(),
+        home: PageLoginBase(),
       ));
 
       Finder textFieldLogin = find.byKey(const Key('textFieldLogin'));

@@ -1,32 +1,37 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:runtickets/styles/app_colors.dart';
-import 'package:runtickets/widgets_input/utils/input_colors.dart';
-import 'package:runtickets/widgets_input/utils/input_fontsize.dart';
 import 'package:runtickets/widgets_input/utils/input_utils.dart';
-
 import 'enums/input_text_state_enum.dart';
+import 'utils/input_fontsize.dart';
 
+enum TypeDocument {
+  cpf,
+  cnpj,
+  estrangeiro_rne,
+  estrangeiro_passaporte,
+}
 
-class TextInputPassword extends StatefulWidget {
-  final TextEditingController passwordController;
+class TextInputDocument extends StatefulWidget {
+  final TextEditingController controller;
   final String label;
-  final String? hint;
+  final String hint;
   final bool enabled;
   final GlobalKey<FormState> formKey;
-
-  const TextInputPassword(
+  const TextInputDocument(
       {super.key,
-        required this.passwordController,
+        required this.controller,
         required this.label,
-        this.hint = "∗ ∗ ∗ ∗ ∗ ∗",
+        required this.hint,
         required this.formKey,
         this.enabled = true});
 
   @override
-  State<TextInputPassword> createState() => _TextInputPasswordState();
+  State<TextInputDocument> createState() => _TextInputDocumentState();
 }
 
-class _TextInputPasswordState extends State<TextInputPassword> {
+class _TextInputDocumentState extends State<TextInputDocument> {
   TypeTextFieldState statusTextField = TypeTextFieldState.valided;
 
   @override
@@ -37,8 +42,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
           alignment: Alignment.centerLeft,
           child: Text(
             widget.label,
-            style: TextStyle(
-                fontSize: InputTextFontSize.fontSizeLabel),
+            style: const TextStyle(fontSize: 12),
           ),
         ),
         const SizedBox(
@@ -47,7 +51,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
         SizedBox(
           child: Focus(
             onFocusChange: (hasFocus){
-              if (widget.passwordController.text.isEmpty) {
+              if (widget.controller.text.isEmpty) {
                 setState(() {
                   statusTextField = TypeTextFieldState.valided;
                 });
@@ -56,15 +60,10 @@ class _TextInputPasswordState extends State<TextInputPassword> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: TextFormField(
-                key: const Key('textFieldPassword'),
-                controller: widget.passwordController,
-                keyboardType: TextInputType.visiblePassword,
-                enabled: widget.enabled,
-                obscureText: true,
-                autocorrect: false,
-                obscuringCharacter: "∗",
-                style: const TextStyle(
-                    fontSize: InputTextFontSize.fontSizeText),
+                key: const Key('textFieldDocument'),
+                controller: widget.controller,
+                keyboardType: TextInputType.emailAddress,
+                enabled: true,
                 decoration: InputDecoration(
                     hintText: widget.hint,
                     fillColor: AppColors.background,
@@ -88,6 +87,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
                 onChanged: (value) {
                   widget.formKey.currentState?.validate();
                 },
+
               ),
             ),
           ),
@@ -98,6 +98,17 @@ class _TextInputPasswordState extends State<TextInputPassword> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(InputUtils.getTextMessageError(statusTextField), style: const TextStyle(
+                  color: AppColors.colorError,
+                  fontWeight: FontWeight.bold,
+                  fontSize: InputTextFontSize.fontSizeErrorTextField
+              ),),
+            ),
+          )else
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text("", style: TextStyle(
                   color: AppColors.colorError,
                   fontWeight: FontWeight.bold,
                   fontSize: InputTextFontSize.fontSizeErrorTextField
