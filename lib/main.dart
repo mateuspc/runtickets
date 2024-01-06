@@ -7,6 +7,7 @@ import 'package:runtickets/pages/splash/page_splash.dart';
 import 'package:runtickets/routes.dart';
 import 'package:runtickets/styles/app_colors.dart';
 import 'package:runtickets/styles/app_fonts.dart';
+import 'package:runtickets/widgets_input/providers/type_document_cadastro_provider.dart';
 
 void main() async {
 
@@ -24,7 +25,8 @@ class RunTickets extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LoginProvider(false),)
+        ChangeNotifierProvider(create: (_) => LoginProvider(false),),
+        ChangeNotifierProvider(create: (_) => TypeDocumentCadastroProvider(),)
       ],
       child: MaterialApp.router(
         title: 'Run Tickets',

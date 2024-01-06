@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Importe o pacote para usar o TextInputFormatter
 import 'package:runtickets/styles/app_colors.dart';
-import 'package:runtickets/styles/app_fontSize.dart';
 import 'package:runtickets/widgets_input/utils/input_utils.dart';
-import 'package:validators/validators.dart';
-
 import 'enums/input_text_state_enum.dart';
 import 'header/header_textfield.dart';
 import 'text_style/style_text_field.dart';
 import 'utils/input_fontsize.dart';
 
-class TextInputEmail extends StatefulWidget {
-  final TextEditingController emailController;
+class TextInputFullName extends StatefulWidget {
+  final TextEditingController controller;
   final String label;
   final String hint;
   final bool enabled;
   final GlobalKey<FormState> formKey;
 
-  const TextInputEmail({
+  const TextInputFullName({
     Key? key,
-    required this.emailController,
+    required this.controller,
     required this.label,
     required this.hint,
     required this.formKey,
@@ -27,10 +23,10 @@ class TextInputEmail extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<TextInputEmail> createState() => _TextInputEmailState();
+  State<TextInputFullName> createState() => _TextInputFullNameState();
 }
 
-class _TextInputEmailState extends State<TextInputEmail> {
+class _TextInputFullNameState extends State<TextInputFullName> {
   TypeTextFieldState statusTextField = TypeTextFieldState.valided;
 
   @override
@@ -44,7 +40,7 @@ class _TextInputEmailState extends State<TextInputEmail> {
         SizedBox(
           child: Focus(
             onFocusChange: (hasFocus) {
-              if (widget.emailController.text.isEmpty) {
+              if (widget.controller.text.isEmpty) {
                 setState(() {
                   statusTextField = TypeTextFieldState.valided;
                 });
@@ -53,15 +49,12 @@ class _TextInputEmailState extends State<TextInputEmail> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: TextFormField(
-                key: const Key('textFieldLogin'),
-                controller: widget.emailController,
+                key: const Key('textFieldFirstName'),
+                controller: widget.controller,
+                style: styleTextFieldTextTyped(),
                 keyboardType: TextInputType.emailAddress,
                 enabled: true,
-                style: styleTextFieldTextTyped(),
-                inputFormatters: [
-                  // Adicione o TextInputFormatter para remover espaços
-                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                ],
+                textCapitalization: TextCapitalization.words, // Capitaliza a primeira letra de cada palavra
                 decoration: InputDecoration(
                   hintText: widget.hint,
                   fillColor: AppColors.background,
@@ -81,26 +74,10 @@ class _TextInputEmailState extends State<TextInputEmail> {
                   ),
                   border: InputBorder.none,
                 ),
-                validator: (String? value) {
-                  if (isEmail(value!)) {
-                    setState(() {
-                      statusTextField = TypeTextFieldState.valided;
-                    });
-                  }
-                  if (value.isEmpty && FocusScope.of(context).hasFocus) {
-                    setState(() {
-                      statusTextField = TypeTextFieldState.valided;
-                    });
-                  }
-                  if (value.isEmpty && !FocusScope.of(context).hasFocus) {
+                validator: (value) {
+                  if (value!.isEmpty && !FocusScope.of(context).hasFocus) {
                     setState(() {
                       statusTextField = TypeTextFieldState.errorFieldRequired;
-                    });
-                  }
-
-                  if (value.isNotEmpty && !isEmail(value)) {
-                    setState(() {
-                      statusTextField = TypeTextFieldState.emailIsInvalid;
                     });
                   }
                   return null;
@@ -116,5 +93,4 @@ class _TextInputEmailState extends State<TextInputEmail> {
       ],
     );
   }
-
 }

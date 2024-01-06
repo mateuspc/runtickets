@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:runtickets/styles/app_colors.dart';
 import 'package:runtickets/widgets_input/utils/input_utils.dart';
 import 'enums/input_text_state_enum.dart';
+import 'header/header_textfield.dart';
+import 'text_style/style_text_field.dart';
 import 'utils/input_fontsize.dart';
 
 class TextInputLastName extends StatefulWidget {
@@ -29,13 +31,7 @@ class _TextInputLastNameState extends State<TextInputLastName> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            widget.label,
-            style: const TextStyle(fontSize: 12),
-          ),
-        ),
+        labelTopAndErrorTextField(label: widget.label, statusTextField: statusTextField),
         const SizedBox(
           height: 5,
         ),
@@ -54,6 +50,7 @@ class _TextInputLastNameState extends State<TextInputLastName> {
                 key: const Key('textFieldLastName'),
                 controller: widget.controller,
                 keyboardType: TextInputType.emailAddress,
+                style: styleTextFieldTextTyped(),
                 enabled: true,
                 decoration: InputDecoration(
                     hintText: widget.hint,
@@ -83,29 +80,8 @@ class _TextInputLastNameState extends State<TextInputLastName> {
             ),
           ),
         ),
-        if(statusTextField != TypeTextFieldState.valided)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(InputUtils.getTextMessageError(statusTextField), style: const TextStyle(
-                  color: AppColors.colorError,
-                  fontWeight: FontWeight.bold,
-                  fontSize: InputTextFontSize.fontSizeErrorTextField
-              ),),
-            ),
-          )else
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text("", style: TextStyle(
-                  color: AppColors.colorError,
-                  fontWeight: FontWeight.bold,
-                  fontSize: InputTextFontSize.fontSizeErrorTextField
-              ),),
-            ),
-          )
+        const SizedBox(height: 15,)
+
       ],
     );
   }

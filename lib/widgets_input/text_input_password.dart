@@ -5,6 +5,8 @@ import 'package:runtickets/widgets_input/utils/input_fontsize.dart';
 import 'package:runtickets/widgets_input/utils/input_utils.dart';
 
 import 'enums/input_text_state_enum.dart';
+import 'header/header_textfield.dart';
+import 'text_style/style_text_field.dart';
 
 
 class TextInputPassword extends StatefulWidget {
@@ -33,14 +35,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            widget.label,
-            style: TextStyle(
-                fontSize: InputTextFontSize.fontSizeLabel),
-          ),
-        ),
+        labelTopAndErrorTextField(label: widget.label, statusTextField: statusTextField),
         const SizedBox(
           height: 5,
         ),
@@ -62,9 +57,8 @@ class _TextInputPasswordState extends State<TextInputPassword> {
                 enabled: widget.enabled,
                 obscureText: true,
                 autocorrect: false,
+                style: styleTextFieldTextTyped(),
                 obscuringCharacter: "∗",
-                style: const TextStyle(
-                    fontSize: InputTextFontSize.fontSizeText),
                 decoration: InputDecoration(
                     hintText: widget.hint,
                     fillColor: AppColors.background,
@@ -92,18 +86,8 @@ class _TextInputPasswordState extends State<TextInputPassword> {
             ),
           ),
         ),
-        if(statusTextField != TypeTextFieldState.valided)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(InputUtils.getTextMessageError(statusTextField), style: const TextStyle(
-                  color: AppColors.colorError,
-                  fontWeight: FontWeight.bold,
-                  fontSize: InputTextFontSize.fontSizeErrorTextField
-              ),),
-            ),
-          )
+        const SizedBox(height: 15,)
+
       ],
     );
   }

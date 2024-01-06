@@ -167,7 +167,7 @@ class _PageCadastroDesktopState extends State<PageCadastroDesktop> {
                                     label: "Documento",
                                     controller: _documentController,
                                     hint: 'seu cpf',
-                                    formKey: _formKeyCadastro,
+                                    formKey: _formKeyCadastro, initialType: TypeDocument.cpf,
                                   ),
                                 ),
                               ],
