@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:runtickets/styles/app_colors.dart';
 import 'package:runtickets/widgets_input/utils/input_colors.dart';
 import 'package:runtickets/widgets_input/utils/input_fontsize.dart';
 import 'package:runtickets/widgets_input/utils/input_utils.dart';
+import 'package:uicons/uicons.dart';
 
 import 'enums/input_text_state_enum.dart';
 import 'header/header_textfield.dart';
@@ -15,6 +17,7 @@ class TextInputPassword extends StatefulWidget {
   final String? hint;
   final bool enabled;
   final GlobalKey<FormState> formKey;
+  final bool obscureText;
 
   const TextInputPassword(
       {super.key,
@@ -22,6 +25,7 @@ class TextInputPassword extends StatefulWidget {
         required this.label,
         this.hint = "∗ ∗ ∗ ∗ ∗ ∗",
         required this.formKey,
+        required this.obscureText,
         this.enabled = true});
 
   @override
@@ -30,6 +34,13 @@ class TextInputPassword extends StatefulWidget {
 
 class _TextInputPasswordState extends State<TextInputPassword> {
   TypeTextFieldState statusTextField = TypeTextFieldState.valided;
+  bool obscureText = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +66,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
                 controller: widget.passwordController,
                 keyboardType: TextInputType.visiblePassword,
                 enabled: widget.enabled,
-                obscureText: true,
+                obscureText: obscureText,
                 autocorrect: false,
                 style: styleTextFieldTextTyped(),
                 obscuringCharacter: "∗",
@@ -63,6 +74,23 @@ class _TextInputPasswordState extends State<TextInputPassword> {
                     hintText: widget.hint,
                     fillColor: AppColors.background,
                     filled: true,
+                    suffixIcon: GestureDetector(
+                      onTap: (){
+                        HapticFeedback.mediumImpact();
+                        setState(() {
+                          obscureText = !obscureText;
+                        });
+                      },
+                      child: Container(
+                          color: Colors.transparent,
+                          child: Icon(
+                            obscureText
+                              ? UIcons.regularRounded.eye
+                              : UIcons.regularRounded.eye_crossed,
+                              size: 20,
+                          )
+                      ),
+                    ),
                     hintStyle: const TextStyle(color: Colors.grey,
                         fontSize: InputTextFontSize.fontSizeHint),
                     labelStyle: const TextStyle(color: Colors.grey,

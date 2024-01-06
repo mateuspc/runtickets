@@ -20,7 +20,7 @@ class PageCadastroDesktop extends StatefulWidget {
   State<PageCadastroDesktop> createState() => _PageCadastroDesktopState();
 }
 
-class _PageCadastroDesktopState extends State<PageCadastroDesktop> {
+class _PageCadastroDesktopState extends State<PageCadastroDesktop> with SingleTickerProviderStateMixin{
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _sobrenomeController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -31,9 +31,28 @@ class _PageCadastroDesktopState extends State<PageCadastroDesktop> {
   final TextEditingController _documentController = TextEditingController();
   final GlobalKey<FormState> _formKeyCadastro = GlobalKey<FormState>();
 
+  late AnimationController _animationController;
+  late Animation<Offset> _slideAnimation;
+
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(1.0, -1.0),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    ));
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -62,134 +81,153 @@ class _PageCadastroDesktopState extends State<PageCadastroDesktop> {
             child: Form(
               key: _formKeyCadastro,
               child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Card(
-                      color: Colors.white,
-                      elevation: 0,
-                      child: SingleChildScrollView(
-                        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Cadastro",
-                                style: TextStyle(
-                                    color: AppColors.colorBlack,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
+                child: SlideTransition(
+                  position: _slideAnimation,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Card(
+                        color: Colors.white,
+                        elevation: 0,
+                        child: SingleChildScrollView(
+                          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Cadastro",
+                                  style: TextStyle(
+                                      color: AppColors.colorBlack,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextInputFirstName(
-                                    key: const Key('textFieldNome'),
-                                    label: "Nome",
-                                    controller: _nomeController,
-                                    hint: 'seu nome',
-                                    formKey: _formKeyCadastro,
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TextInputFirstName(
+                                      key: const Key('textFieldNome'),
+                                      label: "Nome",
+                                      controller: _nomeController,
+                                      hint: 'seu nome',
+                                      formKey: _formKeyCadastro,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                Expanded(
-                                  child: TextInputLastName(
-                                    key: const Key('textFieldSobrenome'),
-                                    label: 'Sobrenome',
-                                    controller: _sobrenomeController,
-                                    formKey: _formKeyCadastro, hint: 'seu sobrenome',
+                                  const SizedBox(
+                                    width: 15,
                                   ),
-                                ),
-                              ],
-                            ),
-                            TextInputEmail(
-                              key: const Key('textFieldEmailCadastro'),
-                              label: "E-mail",
-                              emailController: _emailController,
-                              hint: 'exemplo@gmail.com',
-                              formKey: _formKeyCadastro,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextInputDataNascimento(
-                                    key: const Key('textFieldDataNascimento'),
-                                    label: "Data de nascimento",
-                                    controller: _dataNascimentoController,
-                                    hint: '##/##/####',
-                                    formKey: _formKeyCadastro,
+                                  Expanded(
+                                    child: TextInputLastName(
+                                      key: const Key('textFieldSobrenome'),
+                                      label: 'Sobrenome',
+                                      controller: _sobrenomeController,
+                                      formKey: _formKeyCadastro, hint: 'seu sobrenome',
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: TextInputWhatsapp(
-                                    key: const Key('textFieldWhatsapp'),
-                                    label: 'Whatsapp',
-                                    controller: _whatsappController,
-                                    formKey: _formKeyCadastro, hint: 'Ex: ## #########',
+                                ],
+                              ),
+                              TextInputEmail(
+                                key: const Key('textFieldEmailCadastro'),
+                                label: "E-mail",
+                                emailController: _emailController,
+                                hint: 'exemplo@gmail.com',
+                                formKey: _formKeyCadastro,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TextInputDataNascimento(
+                                      key: const Key('textFieldDataNascimento'),
+                                      label: "Data de nascimento",
+                                      controller: _dataNascimentoController,
+                                      hint: '##/##/####',
+                                      formKey: _formKeyCadastro,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: TextInputDropdownButtonTipoDocument(
-                                    key: const Key('textFieldDocument'),
-                                    label: "Tipo",
-                                    controller: _documentController,
-                                    hint: '',
-                                    formKey: _formKeyCadastro,
+
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: size.width < 600 ? 3 : 2,
+                                    child: TextInputDropdownButtonTipoDocument(
+                                      key: const Key('textFieldDocument'),
+                                      label: "Tipo",
+                                      controller: _documentController,
+                                      hint: '',
+                                      formKey: _formKeyCadastro,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: TextInputDocument(
-                                    key: const Key('textFieldDocument'),
-                                    label: "Documento",
-                                    controller: _documentController,
-                                    hint: 'seu cpf',
-                                    formKey: _formKeyCadastro, initialType: TypeDocument.cpf,
+                                  const SizedBox(
+                                    width: 10,
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            ElevatedButtonCustom(
-                              text: 'Cadastrar',
-                              onPressed: () {
-                                FocusScope.of(context).unfocus();
-                                _formKeyCadastro.currentState!.validate();
-                                // context.go(AppRoutes.PAGE_LOADING);
-                              },),
-                          ],
+                                  Expanded(
+                                    flex: 3,
+                                    child: TextInputDocument(
+                                      key: const Key('textFieldDocument'),
+                                      label: "Documento",
+                                      controller: _documentController,
+                                      hint: 'seu cpf',
+                                      formKey: _formKeyCadastro, initialType: TypeDocument.cpf,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TextInputPassword(
+                                      key: const Key('textFieldSenhaCadastro'),
+                                      label: "Senha",
+                                      passwordController: _senhaController,
+                                      hint: 'Digite uma nova senha',
+                                      formKey: _formKeyCadastro,
+                                      obscureText: true,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    child: TextInputPassword(
+                                      key: const Key('textFieldSenhaConfirmCadastro'),
+                                      label: "Repetir senha",
+                                      passwordController: _senhaController,
+                                      hint: 'Digite a senha novamente',
+                                      formKey: _formKeyCadastro,
+                                      obscureText: true,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              ElevatedButtonCustom(
+                                text: 'Cadastrar',
+                                onPressed: () {
+                                  FocusScope.of(context).unfocus();
+                                  _formKeyCadastro.currentState!.validate();
+                                  // context.go(AppRoutes.PAGE_LOADING);
+                                },),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 40,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

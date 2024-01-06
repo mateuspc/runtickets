@@ -10,6 +10,7 @@ import 'package:runtickets/widgets_input/text_input_document.dart';
 import 'package:runtickets/widgets_input/text_input_email.dart';
 import 'package:runtickets/widgets_input/text_input_first_name.dart';
 import 'package:runtickets/widgets_input/text_input_fullname.dart';
+import 'package:runtickets/widgets_input/text_input_password.dart';
 import 'package:uicons/uicons.dart';
 
 class PageCadastroMobile extends StatefulWidget {
@@ -74,7 +75,9 @@ class _PageCadastroMobileState extends State<PageCadastroMobile>
               icon: Icon(UIcons.regularRounded.angle_left),
             ),
           ),
-          title: Image.asset("assets/logo/logo_horizontal_azul.png"),
+          title: Container(
+              height: 30,
+              child: Image.asset("assets/logo/logo_horizontal_azul.png")),
         ),
         body: PageView(
           children: [
@@ -164,6 +167,28 @@ class _PageCadastroMobileState extends State<PageCadastroMobile>
                           hint: 'seu cpf',
                           formKey: _formKeyCadastro,
                           initialType: TypeDocument.cpf,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        TextInputPassword(
+                          key: const Key('textFieldSenhaCadastro'),
+                          label: "Senha",
+                          passwordController: _senhaController,
+                          hint: 'Digite uma nova senha',
+                          formKey: _formKeyCadastro,
+                          obscureText: true,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        TextInputPassword(
+                          key: const Key('textFieldSenhaConfirmCadastro'),
+                          label: "Repetir senha",
+                          passwordController: _senhaController,
+                          hint: 'Digite a senha novamente',
+                          formKey: _formKeyCadastro,
+                          obscureText: true,
                         ),
                         const SizedBox(
                           width: 15,

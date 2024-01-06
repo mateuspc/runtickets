@@ -83,6 +83,8 @@ class _TextInputDropdownButtonTipoDocumentState extends State<TextInputDropdownB
                   }
                   return null;
                 },
+                alignment: AlignmentDirectional.centerStart,
+                dropdownColor: AppColors.colorWhite, // Altere para a cor desejada
                 onChanged: (value) {
                   widget.controller.text = "";
                   TypeDocumentCadastroProvider type =
@@ -99,6 +101,7 @@ class _TextInputDropdownButtonTipoDocumentState extends State<TextInputDropdownB
                   ),),
                 ))
                     .toList(),
+
                 // Configurando a posição da janela
                 // Neste exemplo, estou movendo a janela para baixo adicionando 80 pixels à posição vertical
                 menuMaxHeight: 200, // Defina a altura máxima do menu conforme necessário
@@ -116,29 +119,7 @@ class _TextInputDropdownButtonTipoDocumentState extends State<TextInputDropdownB
             ),
           ),
         ),
-        if(statusTextField != TypeTextFieldState.valided)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(InputUtils.getTextMessageError(statusTextField), style: const TextStyle(
-                  color: AppColors.colorError,
-                  fontWeight: FontWeight.bold,
-                  fontSize: InputTextFontSize.fontSizeErrorTextField
-              ),),
-            ),
-          )else
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text("", style: TextStyle(
-                  color: AppColors.colorError,
-                  fontWeight: FontWeight.bold,
-                  fontSize: InputTextFontSize.fontSizeErrorTextField
-              ),),
-            ),
-          )
+        const SizedBox(height: 15,)
       ],
     );
   }

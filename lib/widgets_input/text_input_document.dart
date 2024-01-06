@@ -145,36 +145,7 @@ class _TextInputDocumentState extends State<TextInputDocument> {
             ),
           ),
         ),
-        if (statusTextField != TypeTextFieldState.valided)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                InputUtils.getTextMessageError(statusTextField),
-                style: const TextStyle(
-                  color: AppColors.colorError,
-                  fontWeight: FontWeight.bold,
-                  fontSize: InputTextFontSize.fontSizeErrorTextField,
-                ),
-              ),
-            ),
-          )
-        else
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "",
-                style: TextStyle(
-                  color: AppColors.colorError,
-                  fontWeight: FontWeight.bold,
-                  fontSize: InputTextFontSize.fontSizeErrorTextField,
-                ),
-              ),
-            ),
-          )
+        const SizedBox(height: 15,)
       ],
     );
   }

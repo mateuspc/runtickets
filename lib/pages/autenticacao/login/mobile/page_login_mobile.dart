@@ -111,7 +111,7 @@ class _PageLoginMobileState extends State<PageLoginMobile> with SingleTickerProv
                                 key: const Key('textFieldSenha'),
                                 label: "Senha",
                                 passwordController: _senhaController,
-                                formKey: _formKey,
+                                formKey: _formKey, obscureText: true,
                               ),
                               const SizedBox(
                                 height: 15,
